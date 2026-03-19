@@ -7,8 +7,53 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <a href="/" class="active">Dashboard</a>
+        <a href="/clock">Digital Clock</a>
+        <a href="/statistics">Statistics</a>
+    </nav>
+
     <div class="container">
         <h1>SMS Management Dashboard</h1>
+
+        <!-- Statistics Panel -->
+        <div class="statistics-panel">
+            <h2>Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="total-sms">0</div>
+                    <div class="stat-label">Total SMS</div>
+                </div>
+                <div class="stat-card stat-success">
+                    <div class="stat-number" id="sent-sms">0</div>
+                    <div class="stat-label">Sent</div>
+                </div>
+                <div class="stat-card stat-danger">
+                    <div class="stat-number" id="failed-sms">0</div>
+                    <div class="stat-label">Failed</div>
+                </div>
+                <div class="stat-card stat-warning">
+                    <div class="stat-number" id="pending-sms">0</div>
+                    <div class="stat-label">Pending</div>
+                </div>
+            </div>
+            <p style="margin-top:15px;color:#666;">Last Sent: <strong id="last-sent">N/A</strong></p>
+        </div>
+
+        <!-- Send SMS Form -->
+        <div class="send-sms-form">
+            <h2>Send SMS</h2>
+            <form id="smsForm">
+                <label for="recipient">Recipient Phone Number:</label>
+                <input type="text" id="recipient" name="recipient" placeholder="+66812345678" required>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" placeholder="Type your message here..." required></textarea>
+                <button type="submit">Send SMS</button>
+            </form>
+        </div>
+
+        <!-- SMS History Table -->
         <div class="sent-sms-list">
             <h2>Sent SMS List</h2>
             <table>
@@ -16,34 +61,24 @@
                     <tr>
                         <th>Recipient</th>
                         <th>Message</th>
+                        <th>Status</th>
                         <th>Date Sent</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Dynamic content to be populated by JavaScript -->
+                    <!-- Dynamic content populated by JavaScript -->
                 </tbody>
             </table>
         </div>
-        <div class="statistics-panel">
-            <h2>Statistics</h2>
-            <p>Total SMS Sent: <span id="total-sms">0</span></p>
-            <p>Last Sent SMS: <span id="last-sent">N/A</span></p>
-        </div>
+
+        <!-- History Section with Pagination -->
         <div class="history-section">
             <h2>History</h2>
-            <p>...</p>
-        </div>
-        <div class="send-sms-form">
-            <h2>Send SMS</h2>
-            <form id="smsForm">
-                <label for="recipient">Recipient:</label>
-                <input type="text" id="recipient" name="recipient" required>
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" required></textarea>
-                <button type="submit">Send SMS</button>
-            </form>
+            <p style="color:#888;">SMS history with pagination will appear here after sending messages.</p>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
