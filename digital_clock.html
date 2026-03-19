@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #clock { margin: 20px; }
+        .timezone { margin: 5px; }
+        button { margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Digital Clock</h1>
+    <div id="clock"></div>
+    <div>
+        <input type="text" id="timezone_input" placeholder="Enter Timezone" />
+        <button id="add_timezone">Add Timezone</button>
+        <button id="remove_timezone">Remove Timezone</button>
+        <button id="toggle_format">Toggle Format</button>
+    </div>
+    <div id="timezones"></div>
+
+    <script>
+        let timezones = [];
+        let is24Hour = true;
+
+        const updateClock = () => {
+            const utcDate = new Date();
+            document.getElementById('clock').innerHTML = '';
+            timezones.forEach(tz => {
+                const localDate = new Date(utcDate.toLocaleString('en-US', { timeZone: tz }));
+                const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: !is24Hour };
+                document.getElementById('clock').innerHTML += `<div class='timezone'>${tz}: ${localDate.toLocaleTimeString('en-US', options)}</div>`;
+            });
+        };
+
+        const addTimezone = () => {
+            const timezone = document.getElementById('timezone_input').value;
+            if (timezone && !timezones.includes(timezone)) {
+                timezones.push(timezone);
+                document.getElementById('timezone_input').value = '';
+                updateClock();
+                renderTimezones();
+            }
+        };
+
+        const removeTimezone = () => {
+            const timezone = document.getElementById('timezone_input').value;
+            if (timezone && timezones.includes(timezone)) {
+                timezones = timezones.filter(tz => tz !== timezone);
+                document.getElementById('timezone_input').value = '';
+                updateClock();
+                renderTimezones();
+            }
+        }; 
+
+        const toggleFormat = () => {
+            is24Hour = !is24Hour;
+            updateClock();
+        };
+
+        const renderTimezones = () => {
+            const tzDiv = document.getElementById('timezones');
+            tzDiv.innerHTML = '<strong>Current Timezones:</strong> ' + timezones.join(', ');
+        };
+
+        document.getElementById('add_timezone').onclick = addTimezone;
+        document.getElementById('remove_timezone').onclick = removeTimezone;
+        document.getElementById('toggle_format').onclick = toggleFormat;
+
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+</html>
