@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMS Management Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>SMS Management Dashboard</h1>
+        <div class="sent-sms-list">
+            <h2>Sent SMS List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Recipient</th>
+                        <th>Message</th>
+                        <th>Date Sent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dynamic content to be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+        <div class="statistics-panel">
+            <h2>Statistics</h2>
+            <p>Total SMS Sent: <span id="total-sms">0</span></p>
+            <p>Last Sent SMS: <span id="last-sent">N/A</span></p>
+        </div>
+        <div class="history-section">
+            <h2>History</h2>
+            <p>...</p>
+        </div>
+        <div class="send-sms-form">
+            <h2>Send SMS</h2>
+            <form id="smsForm">
+                <label for="recipient">Recipient:</label>
+                <input type="text" id="recipient" name="recipient" required>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit">Send SMS</button>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
